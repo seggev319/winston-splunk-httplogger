@@ -95,6 +95,9 @@ var SplunkStreamEvent = function (config) {
   config.splunk.maxBatchCount = 1;
   this.server = new SplunkLogger(config.splunk);
 
+  // Override request options for the Splunk logger
+  Object.assign(this.server.requestOptions, config.splunk.requestOptions);
+
   // Override the default event formatter
   if (config.splunk.eventFormatter) {
     this.server.eventFormatter = config.splunk.eventFormatter;
@@ -128,19 +131,20 @@ SplunkStreamEvent.prototype.log = function (info, callback) {
 
   delete meta[Symbol.for('level')];
   delete meta[Symbol.for('message')];
+  delete meta['message'];
   var splunkInfo = info.splunk || {};
 
   var payload = {
-    message: {
-      msg: msg
-    },
+    message: msg,
     metadata: Object.assign({}, this.defaultMetadata, splunkInfo),
     severity: level
   };
 
+  delete meta.splunk;
+
   if (meta) {
     if (Object.keys(meta).length) {
-      payload.message.meta = meta;
+      payload.meta = meta;
     }
   }
 
