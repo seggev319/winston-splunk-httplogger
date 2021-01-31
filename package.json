@@ -1,6 +1,6 @@
 {
   "name": "winston-splunk-httplogger",
-  "version": "2.3.3",
+  "version": "2.4.0",
   "description": "A Winston compatible transport for logging to a Splunk HTTP Event Collector",
   "homepage": "https://github.com/adrianhall/winston-splunk-httplogger",
   "main": "index.js",
@@ -25,6 +25,12 @@
     "name": "Adrian Hall",
     "email": "adrian@shellmonger.com"
   },
+  "contributors": [
+    {
+      "name": "Seggev Shoresh",
+      "email": "shoresh319@gmail.com"
+    }
+  ],
   "license": "MIT",
   "tonicExampleFilename": "example/server.js",
   "devDependencies": {
